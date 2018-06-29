@@ -1,0 +1,17 @@
+{
+    "name": "neuraln",
+    "version": "1.0.0",
+    "keywords": [
+        "util",
+        "functional",
+        "server",
+        "client",
+        "browser"
+    ],
+    "author": "ftetart",
+    "contributors": [],
+    "dependencies": {
+        "fs": "0.0.1-security",
+        "nlp-js-tools-french": "^1.0.9",
+    }
+}

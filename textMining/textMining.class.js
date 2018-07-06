@@ -58,10 +58,6 @@ class textMining {
         this.hyperParams = hyperParams;
         return this.hyperParams;
     }
-    
-    wordEmbedding(){
-        this.wordEmbedding = 0;
-    }
 }
 
 
@@ -69,3 +65,4 @@ var data = fs.readFileSync('../resources/cours_neurone.txt', 'utf8');
 var text = new textMining(data);
 text.cleanText();
 console.log(text.extractParams());
+

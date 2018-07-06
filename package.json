@@ -1,17 +1,16 @@
 {
-    "name": "neuraln",
-    "version": "1.0.0",
-    "keywords": [
-        "util",
-        "functional",
-        "server",
-        "client",
-        "browser"
-    ],
-    "author": "ftetart",
-    "contributors": [],
-    "dependencies": {
-        "fs": "0.0.1-security",
-        "nlp-js-tools-french": "^1.0.9",
-    }
+  "name": "neuraln_070618",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "babar": "^0.2.0",
+    "fs": "0.0.1-security",
+    "single-line-log": "^1.1.2"
+  }
 }

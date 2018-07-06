@@ -6,6 +6,7 @@ class parser {
         this.p = 0;
         this.dataTrain = fs.readFileSync(pathDataTrain, { encoding : 'utf8'}).split(/\s+/);
         this.dataTest = fs.readFileSync(pathDataTest, { encoding : 'utf8'}).split(/\s+/);
+        console.log("Parsing data...");
     }
 
     poker(data){
@@ -34,21 +35,21 @@ class parser {
         }
         return this.learnValues
     }
-    
+
     poker2(data){
-    	this.n = 5;
-    	this.p = 10;
+        this.n = 5;
+        this.p = 10;
         this.learnValues = {
-                inputs:[],
-                outputs:[]
-    	}
+                        inputs:[],
+                        outputs:[]
+        }
         for(var i=0; i<data.length; i++){
-        	var tmp = data[i].split(",");
-        	var input = [];
+            var tmp = data[i].split(",");
+            var input = [];
             for(var l=0 ; l<tmp.length ; l++){
                 tmp[l] = tmp[l]*1;
             }
-            
+
             var out = tmp.pop()*1;
             this.learnValues.outputs[i] = [];
             for(var a=0 ; a<this.p ; a++){
@@ -56,28 +57,28 @@ class parser {
                 if(a == out) output = 1;
                 this.learnValues.outputs[i][a] = output;
             }
-            
-        	for(var j=0; j<tmp.length-1; j=j+2){
-        			input.push((((tmp[j]*13)-13)+tmp[j+1]));
-        	}
-        	this.learnValues.inputs[i] = input; 
+
+            for(var j=0; j<tmp.length-1; j=j+2){
+                input.push((((tmp[j]*13)-13)+tmp[j+1]));
+            }
+            this.learnValues.inputs[i] = input; 
         }
         return this.learnValues
     }
-    
+
     poker3(data){
-    	this.n = 52;
-    	this.p = 10;
+        this.n = 52;
+        this.p = 10;
         this.learnValues = {
-                inputs:[],
-                outputs:[]
-    	}
+                        inputs:[],
+                        outputs:[]
+        }
         for(var i=0; i<data.length; i++){
-        	var tmp = data[i].split(",");
+            var tmp = data[i].split(",");
             for(var l=0 ; l<tmp.length ; l++){
                 tmp[l] = tmp[l]*1;
             }
-            
+
             var out = tmp.pop()*1;
             this.learnValues.outputs[i] = [];
             for(var a=0 ; a<this.p ; a++){
@@ -85,22 +86,22 @@ class parser {
                 if(a == out) output = 1;
                 this.learnValues.outputs[i][a] = output;
             }
-            
+
             this.learnValues.inputs[i] = [];
             var inp=[];
-        	for(var j=0; j<tmp.length; j=j+2){
-    			inp.push((((tmp[j]*13)-13)+tmp[j+1]));
-        	}
-            
+            for(var j=0; j<tmp.length; j=j+2){
+                inp.push((((tmp[j]*13)-13)+tmp[j+1]));
+            }
+
             for(var b=0; b<this.n; b++){
-            	for(var e=0; e<inp.length; e++){
+                for(var e=0; e<inp.length; e++){
                     var input = 0;
                     if(b == inp[e]-1){
-                    	input = 1;
-                    	break;
+                        input = 1;
+                        break;
                     }
                 }
-            	this.learnValues.inputs[i][b] = input;
+                this.learnValues.inputs[i][b] = input;
             }
         }
         return this.learnValues

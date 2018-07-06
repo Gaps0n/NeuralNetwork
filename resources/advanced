@@ -1,0 +1,43 @@
+﻿- Deux facteurs principaux qui influence sur l'apprentissage : 
+	- La qualité des données d'apprentissage
+	- La diversité des valeurs
+	
+- Sur la couche de sortie la fonction sigmoid reste fiable,
+tant que l'on reste dans une classification binaire donc à deux sorties possible.
+
+- Pour une classification de 2 à n sorties on utilise la fonction d'activation softmax qui est une généralisation de la sigmoid,
+cependant elle s'utilise que sur la couche de sortie /!\
+
+- Le choix des paramètres(taux d'apprentissage, itération, architecture du réseau) doivent être minutieux pour ne pas rentrer dans du sur apprentissage.
+(On va préférer un taux d'apprentissage considérablement faible pour un nombre élevé d’itération d'apprentissage)
+
+- L'architecture du réseau est très importante pour ne pas passer sur de l'overfitting(sur-apprentissage),
+En général, la somme du nombre de neurones des couches cachée doit être approximativement égale à notre nombre de variable d'entré du réseau.
+Il n'existe pas, du moin pas encore, d'algorithme permettant de trouver notre architecture parfaite en fonction de notre problème.
+
+- Les données d'entrer doivent être encodé à chaud (One-hot encoding) pour une meilleure compréhention de l'algorithme
+--> Chaque états réprésenté par un bit
+Exemple à deux états possible (Yes --> 10, No --> 01)
+
+- La couche d'entrée reste interne, c'est à dire quel n'est pas modéliser par une couche de neurones mais par les variables d'entrées du réseau
+
+- La fonction d'activation heaviside nous renvois une certitude est pas une probabilité, ce qui va poser problème pour une classification supérieur à 2 entrées.
+
+- Le réseau de neurones simple couche est efficace que sur des problèmes à 2 sorties
+
+- Le seuil ou biais, doit être entre > 0 et < 1, car il est constamment activé
+
+
+
+
+ 
+
+
+
+
+
+
+
+ 
+
+ 

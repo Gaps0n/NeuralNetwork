@@ -1,0 +1,22 @@
+RDN - https://alp.developpez.com/tutoriels/intelligence-artificielle/reseaux-de-neurones/
+	- https://openclassrooms.com/courses/utilisez-des-modeles-supervises-non-lineaires/entrainez-un-perceptron
+	- https://www.math.univ-toulouse.fr/~besse/Wikistat/pdf/st-m-app-rn.pdf
+	- https://fr.wikipedia.org/wiki/R%C3%A9seau_de_neurones_artificiels
+	- http://www.statsoft.fr/concepts-statistiques/reseaux-de-neurones-automatises/reseaux-de-neurones-automatises.htm#.WyjRM-nnhhE
+	- https://deeplearning4j.org/neuralnet-overview
+	
+SIGMOID - https://fr.wikipedia.org/wiki/Sigmo%C3%AFde_(math%C3%A9matiques)
+
+DATASETS - https://archive.ics.uci.edu/ml/index.php
+		 - https://en.wikipedia.org/wiki/List_of_datasets_for_machine_learning_research
+		 - https://www.openml.org/search?type=data
+	
+TrainingMLP(Backpropagnation) - http://home.agh.edu.pl/~vlsi/AI/backp_t_en/backprop.html
+
+SOFTMAX - https://github.com/Kulbear/deep-learning-nano-foundation/wiki/ReLU-and-Softmax-Activation-Functions
+
+DOCJS - https://www.w3schools.com/jS/
+	  - http://devdocs.io/node/
+	  
+TEXTMINING - https://openclassrooms.com/courses/4470541-exploitez-des-donnees-textuelles/4470548-explorez-des-donnees-texte
+		   - http://snowball.tartarus.org/algorithms/french/stemmer.html

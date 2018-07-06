@@ -1,5 +1,7 @@
 var neurone = require('./neurone.class.js')
 var activationFunction = require('./activationFunction.class.js')
+var log = require('single-line-log').stdout;
+var babar = require('babar');
 var fs = require('fs')
 
 class multipleLayersPerceptron {
@@ -10,20 +12,21 @@ class multipleLayersPerceptron {
         weights:weights,
         activation:activation,
         dataTest:dataTest,
-        cleanOutput:cleanOutput
     }) {
         this.n=n;
         this.layers=[];
         this.q=q;
         this.activation=activation;
         this.testValues=dataTest;
-        this.cleanOutput=cleanOutput;
+        this.cleanOutput=function(output){
+            return output.indexOf(Math.max.apply(null, output));
+        }
         this.stats = {
-        		currentIter:[],
-        		amountPrediction:[],
-        		percentage:[],
-        		amountValue:this.testValues.inputs.length,
-        		
+                        currentIter:[],
+                        amountPrediction:[],
+                        percentage:[],
+                        amountValue:this.testValues.inputs.length,
+
         }
         if (inputs) {
             this.inputs=inputs;
@@ -80,11 +83,11 @@ class multipleLayersPerceptron {
         this.setInputs(input);
         return this.getOutput();
     }
-    
+
     learn(learnValues,iter,alpha){
-    	this.learnValues = learnValues;
+        var graph=[];
+        this.learnValues = learnValues;
         for(var i=0; i<iter; i++){ /* for each iteration of learning */
-        	this.statsTest(i);
             for(var j=0; j<learnValues.inputs.length; j++){ /* for each input dataset of learning */
                 var s=[];
                 var d=[];
@@ -105,11 +108,11 @@ class multipleLayersPerceptron {
                         }
                     }
                 }
-                
+
                 for(var l=0; l<this.q[this.q.length-1]; l++){
                     s[this.q.length-1][l] = Math.exp(s[this.q.length-1][l]) / ssum;
                 }
-                
+
                 d[0]=[];
                 for(var a=0; a<this.q[this.q.length-1]; a++){ /* for each node of layer-out */
                     d[0][a]=(s[this.q.length-1][a]*(1-s[this.q.length-1][a])*(learnValues.outputs[j][a]-s[this.q.length-1][a]));
@@ -143,38 +146,49 @@ class multipleLayersPerceptron {
                     }
                 }
             }
-            console.log((i*100)/iter+"%");
+
+            this.statsTest(i);
+            graph.push([i+1, (this.stats.percentage[i])])
+            log.clear();
+            log("Iter:"+(i+1)+" / "+"Progress:"+(((i+1)*100)/iter).toFixed(0)+"%"+" / "+"CurrentPredict:"+this.stats.percentage[i]+"%");
         }
+        console.log('\n \n'+babar(graph, {
+            color: 'red',
+            grid: 'grey',
+            minY: 0,
+            maxY: 100,
+            yFractions: 0,
+            xFractions: 0
+        }));
     }
-    
+
     statsTest(iter){
         var cpt=0;
         for(var i=0 ; i<this.testValues.inputs.length ;i++){
             var output = this.predict(this.testValues.inputs[i]);
             var prediction = this.cleanOutput(output);
             var result = this.cleanOutput(this.testValues.outputs[i]);
-            if(result==prediction){
-            	cpt++;
-            }
+            if(result==prediction) cpt++;
         }
         this.stats.currentIter.push(iter);
         this.stats.amountPrediction.push(cpt);
         this.stats.percentage.push(cpt*100/this.testValues.inputs.length);
+        return cpt;
     }
-    
+
     getWeights() {
         return weights;
     }
-    
+
     getOutput() {
         this.outputs=[];
         for (var i=0; i<this.q[this.q.length-1]; i++){
             this.outputs.push(this.layers[this.q.length-1][i].getOutput());
         }
         return this.outputs;
-        
+
     }
-     
+
     emptyArray(){
         var a=[];
         for (var i=0; i<this.n; i++) {

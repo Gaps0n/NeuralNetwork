@@ -1,40 +1,37 @@
 var startTime = new Date().getTime();
 var endTime = 0;
+
 var parser = require('./parser.class.js');
 var ia = require('./ia.class.js');
 var activationFunction = require('./activationFunction.class.js');
 
-var parser = new parser('dataset/poker/poker-hand-training-true.data', 'dataset/poker/poker-hand-testing.data');
+//POKER
+var parser = new parser('dataset/poker/poker-hand-training-true.data', 'dataset/poker/poker-hand-testing2.data');
+//[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0] -> [1, 0, 0, 0, 0, 0, 0, 0, 0, 0] -> POKER3
+
+//TICTAC
 //var parser = new parser('dataset/tic-tac/tic-tac-toe.data', 'dataset/tic-tac/tic-tac-test.data');
+//[ 1, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0 ] -> [ 0, 1 ] -> TICTAC
 
 var params = {
                 datatrain: parser.poker3(parser.dataTrain),
                 datatest: parser.poker3(parser.dataTest),                
-                n: parser.n, //Nb of inputs for input layer
+                n: parser.n,
                 p: parser.p,
-                q: [52,10], //Nb of layer
-                iter: 600,
-                alpha: 0.0001,
+                iter: 100,
+                q:[52, 10], //layers --> TICTAC:[27,2] | POKER:[52,10] | SP:[]
+                alpha: 0.07, //learning rate
                 activation: activation.sigmoid,
-                cleanOutput: function(output){
-                    return output.indexOf(Math.max.apply(null, output));
-                }
-             }
-
-var ia = new ia(params);
-
-ia.learning();
-
-for(i=0; i<ia.network.stats.percentage.length; i++){
-    console.log(i, ia.network.stats.percentage[i]);
 }
+var ia = new ia(params);
+//ia.network.loadNetwork('saves/mlp_tictac_95.json');
 
-//console.log(ia.dataTest.inputs)
+ia.training();
+ia.testing();
 
-//console.log(ia.network.stats.iter)
-//console.log(ia.network.layers[2])
-//ia.network.loadNetwork('saves/network.json');
-//var test = ia.network.predict([ 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]);
+
+//var test = ia.network.predict([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0]);
 //console.log(test);
+
 endTime = new Date().getTime() - startTime;
 console.log('_________________________\n'+'Time of exec: '+ endTime/1000 + 's');

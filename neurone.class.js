@@ -56,6 +56,7 @@ class neurone{
     setCeil(ceil){
         this.ceil=ceil;
     }
+    
     integrate(){
         this.output=0;
         for (var i=0; i<this.n; i++) {
@@ -68,7 +69,7 @@ class neurone{
         this.integrate();
         return this.activation(this.output);
     }
-    
+
     getOutputLast(){
         this.integrate();
         return this.output;
